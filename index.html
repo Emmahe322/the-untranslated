@@ -1,0 +1,664 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Artifact 001 — The Untranslated</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Playfair+Display:wght@400;500;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --background: #171714;
+      --surface: #22221e;
+      --surface-light: #2c2b25;
+      --text: #e9e3d5;
+      --muted: #a7a08e;
+      --accent: #bd9c68;
+      --line: #494438;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--background);
+      color: var(--text);
+      font-family: "DM Sans", sans-serif;
+      line-height: 1.7;
+    }
+
+    .mono {
+      font-family: "DM Mono", monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    header {
+      padding: 25px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .logo {
+      font-family: "DM Mono", monospace;
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      color: var(--accent);
+    }
+
+    nav {
+      display: flex;
+      gap: 25px;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 12px;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+    }
+
+    .hero {
+      padding: 90px 7% 65px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .collection {
+      margin-bottom: 25px;
+    }
+
+    h1 {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(48px, 9vw, 100px);
+      line-height: 0.98;
+      font-weight: 400;
+      letter-spacing: -0.045em;
+      max-width: 850px;
+      margin-bottom: 30px;
+    }
+
+    h1 span {
+      color: var(--accent);
+      font-style: italic;
+    }
+
+    .intro {
+      max-width: 570px;
+      font-size: 16px;
+      color: var(--muted);
+    }
+
+    .artifact-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 35px;
+      padding-top: 35px;
+      margin-top: 45px;
+      border-top: 1px solid var(--line);
+    }
+
+    .meta-item p:last-child {
+      color: var(--text);
+      font-size: 13px;
+      margin-top: 5px;
+    }
+
+    .artifact-section {
+      padding: 30px 7% 100px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .section-heading {
+      font-family: "Playfair Display", serif;
+      font-size: 38px;
+      font-weight: 400;
+      margin-bottom: 12px;
+    }
+
+    .section-intro {
+      color: var(--muted);
+      max-width: 600px;
+      margin-bottom: 35px;
+    }
+
+    .object-frame {
+      min-height: 430px;
+      background:
+        radial-gradient(ellipse at center, #494236 0%, #292720 55%, #1d1c18 100%);
+      border: 1px solid var(--line);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stone {
+      width: min(310px, 75vw);
+      aspect-ratio: 0.78;
+      background:
+        radial-gradient(ellipse at 35% 25%, #a99b7b 0%, transparent 35%),
+        linear-gradient(135deg, #81745b, #514735 55%, #77684f);
+      clip-path: polygon(9% 5%, 88% 0, 100% 17%, 94% 91%, 76% 100%, 4% 92%, 0 20%);
+      box-shadow: 0 25px 60px #00000080;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: #29251d;
+      transform: rotate(-3deg);
+      position: relative;
+    }
+
+    .stone::before {
+      content: "";
+      position: absolute;
+      inset: 12px;
+      border: 1px solid #d0bd91;
+      opacity: 0.3;
+    }
+
+    .stone-symbols {
+      font-family: "DM Mono", monospace;
+      font-size: clamp(38px, 8vw, 58px);
+      letter-spacing: 8px;
+      text-shadow: 1px 2px 2px #d3c29b;
+    }
+
+    .stone-label {
+      margin-top: 25px;
+      font-family: "DM Mono", monospace;
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      color: #302a20;
+    }
+
+    .image-caption {
+      padding: 13px 0;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .glyph-section {
+      padding: 90px 7%;
+      background: var(--surface);
+    }
+
+    .glyph-inner {
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .glyph-display {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin-top: 35px;
+    }
+
+    .glyph-card {
+      background: var(--surface-light);
+      padding: 30px 20px;
+      border: 1px solid var(--line);
+      text-align: center;
+    }
+
+    .glyph {
+      font-family: "DM Mono", monospace;
+      font-size: 55px;
+      color: var(--accent);
+      margin-bottom: 15px;
+    }
+
+    .glyph-card h3 {
+      font-family: "Playfair Display", serif;
+      font-weight: 400;
+      font-size: 23px;
+      margin-bottom: 5px;
+    }
+
+    .glyph-card p {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .translation-section {
+      max-width: 850px;
+      margin: auto;
+      padding: 100px 7%;
+    }
+
+    .translation-section h2 {
+      font-family: "Playfair Display", serif;
+      font-size: 42px;
+      font-weight: 400;
+      margin-bottom: 15px;
+    }
+
+    .translation-section > p {
+      color: var(--muted);
+      margin-bottom: 35px;
+    }
+
+    .question-box {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      padding: 35px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 12px;
+      font-family: "DM Mono", monospace;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 130px;
+      resize: vertical;
+      padding: 17px;
+      background: #171714;
+      border: 1px solid var(--line);
+      color: var(--text);
+      font-family: "DM Sans", sans-serif;
+      font-size: 15px;
+      outline: none;
+    }
+
+    textarea:focus {
+      border-color: var(--accent);
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 14px 25px;
+      background: var(--accent);
+      color: #1c1a15;
+      border: none;
+      font-family: "DM Mono", monospace;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    button:hover {
+      background: #d4b783;
+    }
+
+    #translation-result {
+      display: none;
+      margin-top: 35px;
+      padding-top: 30px;
+      border-top: 1px solid var(--line);
+    }
+
+    .your-answer {
+      padding: 18px;
+      background: #171714;
+      border-left: 2px solid var(--muted);
+      margin: 12px 0 30px;
+      color: var(--muted);
+      overflow-wrap: anywhere;
+    }
+
+    .archive-answer {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(25px, 5vw, 37px);
+      line-height: 1.3;
+      color: var(--accent);
+      margin: 12px 0;
+    }
+
+    .interpretation-note {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 15px;
+    }
+
+    .literary-section {
+      background: var(--surface);
+      padding: 85px 7%;
+    }
+
+    .literary-inner {
+      max-width: 850px;
+      margin: auto;
+    }
+
+    blockquote {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(25px, 5vw, 38px);
+      line-height: 1.4;
+      margin: 30px 0;
+      color: var(--accent);
+    }
+
+    .literary-inner p {
+      color: var(--muted);
+      max-width: 700px;
+    }
+
+    .source-note {
+      margin-top: 25px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    footer {
+      padding: 30px 7%;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 15px;
+      border-top: 1px solid var(--line);
+    }
+
+    @media (max-width: 650px) {
+      header {
+        align-items: flex-start;
+        gap: 15px;
+        flex-direction: column;
+      }
+
+      nav {
+        gap: 18px;
+      }
+
+      .hero {
+        padding-top: 65px;
+      }
+
+      .artifact-meta {
+        gap: 20px;
+      }
+
+      .glyph-display {
+        grid-template-columns: 1fr;
+      }
+
+      .object-frame {
+        min-height: 350px;
+      }
+
+      .question-box {
+        padding: 22px;
+      }
+
+      footer {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">THE UNTRANSLATED</div>
+    <nav>
+      <a href="#object">The object</a>
+      <a href="#inscription">The inscription</a>
+      <a href="#translation">Decipher</a>
+      <a href="#story">The story</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <section class="hero">
+      <p class="mono collection">VESTIGAN ARCHIVE / COLLECTION 01 OF 08</p>
+
+      <h1>The Buried <span>City</span></h1>
+
+      <p class="intro">
+        A fragment of a forgotten civilization. An inscription without
+        a confirmed translation. What can we recover from a language
+        that time has almost erased?
+      </p>
+
+      <div class="artifact-meta">
+        <div class="meta-item">
+          <p class="mono">ARTIFACT</p>
+          <p>001 / 008</p>
+        </div>
+
+        <div class="meta-item">
+          <p class="mono">CIVILIZATION</p>
+          <p>Ancient Martian</p>
+        </div>
+
+        <div class="meta-item">
+          <p class="mono">SCRIPT</p>
+          <p>Vestigan</p>
+        </div>
+
+        <div class="meta-item">
+          <p class="mono">STATUS</p>
+          <p>Partially deciphered</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="artifact-section" id="object">
+      <p class="mono">01 / THE DISCOVERY</p>
+      <h2 class="section-heading">The object</h2>
+
+      <p class="section-intro">
+        This fragment was recovered from the remains of an ancient
+        Martian settlement. Its surface carries three recurring signs.
+        Their meaning is still open to interpretation.
+      </p>
+
+      <div class="object-frame">
+        <div class="stone">
+          <div class="stone-symbols">⊣ ◈ △</div>
+          <div class="stone-label">VESTIGAN / 001</div>
+        </div>
+      </div>
+
+      <div class="image-caption">
+        <span class="mono">FIG. 001 — INSCRIBED STONE</span>
+        <span class="mono">COLLECTION 01</span>
+      </div>
+    </section>
+
+    <section class="glyph-section" id="inscription">
+      <div class="glyph-inner">
+        <p class="mono">02 / THE INSCRIPTION</p>
+        <h2 class="section-heading">Three signs. Three possibilities.</h2>
+
+        <p class="section-intro">
+          The inscription can be transcribed as DUR — MER — KA.
+          Each sign has a proposed meaning based on the Vestigan
+          writing system developed for this archive.
+        </p>
+
+        <div class="glyph-display">
+
+          <article class="glyph-card">
+            <div class="glyph">⊣</div>
+            <h3>DUR</h3>
+            <p>ABSENCE / END</p>
+          </article>
+
+          <article class="glyph-card">
+            <div class="glyph">◈</div>
+            <h3>MER</h3>
+            <p>MEMORY / PRESERVATION</p>
+          </article>
+
+          <article class="glyph-card">
+            <div class="glyph">△</div>
+            <h3>KA</h3>
+            <p>ORIGIN / BEGINNING</p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="translation-section" id="translation">
+      <p class="mono">03 / YOUR INVESTIGATION</p>
+
+      <h2>Can you decipher the inscription?</h2>
+
+      <p>
+        Look at the three signs and their possible meanings.
+        What do you think this fragment is trying to tell us?
+        Write down your own interpretation before opening the archive.
+      </p>
+
+      <div class="question-box">
+
+        <label for="visitor-answer">YOUR INTERPRETATION</label>
+
+        <textarea
+          id="visitor-answer"
+          placeholder="I think this inscription means..."
+        ></textarea>
+
+        <button id="reveal-button" type="button">
+          Reveal archive interpretation
+        </button>
+
+        <div id="translation-result" aria-live="polite">
+
+          <p class="mono">YOUR INTERPRETATION</p>
+
+          <div class="your-answer" id="submitted-answer"></div>
+
+          <p class="mono">ARCHIVE INTERPRETATION</p>
+
+          <h3 class="archive-answer">
+            What has disappeared is not necessarily forgotten.
+          </h3>
+
+          <p class="interpretation-note">
+            DUR — Absence / MER — Memory / KA — Origin
+          </p>
+
+          <p class="interpretation-note">
+            This is a proposed poetic interpretation, not a verified
+            literal translation. The meaning of the inscription remains
+            open to discussion.
+          </p>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="literary-section" id="story">
+      <div class="literary-inner">
+        <p class="mono">04 / LITERARY CONNECTION</p>
+
+        <h2 class="section-heading">A language lost in time</h2>
+
+        <blockquote>
+          How do you understand a civilization when its language
+          no longer exists?
+        </blockquote>
+
+        <p>
+          In H. Beam Piper's science-fiction story
+          <em>Omnilingual</em> (1957), archaeologists explore the remains
+          of an ancient Martian civilization. They can recognize and
+          pronounce parts of its writing, but understanding its meaning
+          presents a much greater challenge.
+        </p>
+
+        <br>
+
+        <p>
+          The story refers to the Rosetta Stone: a historical example
+          of how a known language can help unlock an unknown writing
+          system. The same question drives this archive:
+          what evidence do we need before we can claim to understand
+          the past?
+        </p>
+
+        <p class="source-note">
+          REFERENCE: H. Beam Piper, <em>Omnilingual</em>, 1957.
+          Read the original story at
+          <a
+            href="https://www.gutenberg.org/cache/epub/19445/pg19445-images.html"
+            target="_blank"
+            rel="noopener noreferrer"
+            style="color: var(--accent);"
+          >
+            Project Gutenberg
+          </a>.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <span class="logo">THE UNTRANSLATED</span>
+    <span class="mono">VESTIGAN ARCHIVE — ARTIFACT 001 / 008</span>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+      const input = document.getElementById("visitor-answer");
+      const button = document.getElementById("reveal-button");
+      const result = document.getElementById("translation-result");
+      const submitted = document.getElementById("submitted-answer");
+
+      button.addEventListener("click", function () {
+
+        const answer = input.value.trim();
+
+        if (answer === "") {
+          input.focus();
+          input.placeholder = "Please enter your interpretation first...";
+          return;
+        }
+
+        submitted.textContent = answer;
+
+        result.style.display = "block";
+
+        result.scrollIntoView({
+          behavior: "smooth",
+          block: "center"
+        });
+
+        button.textContent = "Interpretation revealed";
+
+      });
+
+    });
+  </script>
+
+</body>
+</html>
