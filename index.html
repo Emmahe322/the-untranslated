@@ -12,13 +12,21 @@
 
   <style>
     :root {
-      --background: #171714;
-      --surface: #22221e;
-      --surface-light: #2c2b25;
-      --text: #e9e3d5;
+      --background: #480C0C;
+      --surface: #442B26;
+      --surface-light: #1E130F;
+      --text: #F4E5C4;
       --muted: #a7a08e;
-      --accent: #bd9c68;
-      --line: #494438;
+      --accent: #A4BCD4;
+      --line: #1E130F;
+    }
+    .stone-image {
+    display: block;
+    width: 100%;
+    max-width: 650px;
+    height: auto;
+    margin: 0 auto;
+    object-fit: contain;
     }
 
     * {
@@ -154,22 +162,7 @@
       overflow: hidden;
     }
 
-    .stone {
-      width: min(310px, 75vw);
-      aspect-ratio: 0.78;
-      background:
-        radial-gradient(ellipse at 35% 25%, #a99b7b 0%, transparent 35%),
-        linear-gradient(135deg, #81745b, #514735 55%, #77684f);
-      clip-path: polygon(9% 5%, 88% 0, 100% 17%, 94% 91%, 76% 100%, 4% 92%, 0 20%);
-      box-shadow: 0 25px 60px #00000080;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      color: #29251d;
-      transform: rotate(-3deg);
-      position: relative;
-    }
+
 
     .stone::before {
       content: "";
@@ -477,11 +470,11 @@
         Their meaning is still open to interpretation.
       </p>
 
-      <div class="object-frame">
-        <div class="stone">
-          <div class="stone-symbols">⊣ ◈ △</div>
-          <div class="stone-label">VESTIGAN / 001</div>
-        </div>
+      <div class="stone">
+       <img
+        src="Artifact001.png"
+        class="stone-image"
+       >
       </div>
 
       <div class="image-caption">
